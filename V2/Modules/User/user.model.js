@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const userSchema = require('./user.schema');
 const bcrypt = require('bcryptjs');
 
