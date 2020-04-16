@@ -15,9 +15,8 @@ const app = express();
 //// ***** Global Configure
 app.enable('trust proxy');
 
-// TODO: set view engine
-// app.set('view engine', 'pug');
-// app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'Public', 'views'));
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
@@ -31,8 +30,7 @@ app.options('*', cors());
 //   origin: 'https://www.natours.com'
 // }))
 
-// TODO: set statics folder
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Public', 'assets')));
 
 // Set security HTTP headers
 app.use(helmet());
