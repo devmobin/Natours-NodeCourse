@@ -9,6 +9,11 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
+const ApplicationError = require('./Shared/Error/ApplicationError');
+const globalErrorHandler = require('./Shared/Error/error.controller');
+
+//// ***** Routers
+const userRouter = require('./Modules/User/user.router');
 
 const app = express();
 
@@ -79,9 +84,16 @@ app.use(
 app.use(compression());
 
 //// ***** Routers
+app.use('/api/v1/users', userRouter);
 
 //// ***** Page Not Found 404 Handler
+app.all('*', (req, res, next) => {
+  next(
+    new ApplicationError(`Can't find ${req.originalUrl} on this server!`, 404)
+  );
+});
 
 //// ***** globalErrorHandler
+app.use(globalErrorHandler);
 
 module.exports = app;
