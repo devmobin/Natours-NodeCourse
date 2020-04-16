@@ -14,6 +14,7 @@ const globalErrorHandler = require('./Shared/Error/error.controller');
 
 //// ***** Routers
 const userRouter = require('./Modules/User/user.router');
+const tourRouter = require('./Modules/Tour/tour.router');
 
 const app = express();
 
@@ -85,6 +86,7 @@ app.use(compression());
 
 //// ***** Routers
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/tours', tourRouter);
 
 //// ***** Page Not Found 404 Handler
 app.all('*', (req, res, next) => {
